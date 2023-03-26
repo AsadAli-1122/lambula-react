@@ -2,9 +2,9 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import Discover from './Discover'
-import MyBookings from './MyBookings'
-import TourPackages from './TourPackages'
+import Discover from './discover/Discover'
+import MyBookings from './bookings/MyBookings'
+import TourPackages from './tour/TourPackages'
 
 const Home = () => {
   

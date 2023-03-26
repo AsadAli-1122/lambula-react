@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+
+
 
 const ContactUs = () => {
+  const form = useRef();
+  
+  const sendEmail = (e) => {
+    e.preventDefault();
+  
+    emailjs.sendForm(
+    process.env.REACT_APP_SERVICE_ID, 
+    process.env.REACT_APP_TEMPLATE_ID, 
+    form.current, 
+    process.env.REACT_APP_PUBLIC_KEY)
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+
+      e.target.reset();
+  }
+  
   return (
     <div>
       <div className="my-4">
@@ -15,20 +37,20 @@ const ContactUs = () => {
     <p className="text-base font-light"><i className="fa-solid fa-envelope text-syellow"></i> support@lambula.net</p>
     <p className="text-base font-light">Select Media</p>
     <p className="text-lg font-light space-x-4">
-      <i className="fa-brands fa-facebook-f text-gray-500 cursor-pointer hover:text-syellow ease-in duration-200 hover:translate-x-1 hover:scale-105"></i>
-      <i className="fa-brands fa-instagram text-gray-500 cursor-pointer hover:text-syellow ease-in duration-200 hover:translate-x-1 hover:scale-105"></i>
-      <i className="fa-brands fa-twitter text-gray-500 cursor-pointer hover:text-syellow ease-in duration-200 hover:translate-x-1 hover:scale-105"></i>
+      <i className="fa-brands fa-facebook-f text-gray-500 cursor-pointer hover:text-syellow ease-in duration-200"></i>
+      <i className="fa-brands fa-instagram text-gray-500 cursor-pointer hover:text-syellow ease-in duration-200"></i>
+      <i className="fa-brands fa-twitter text-gray-500 cursor-pointer hover:text-syellow ease-in duration-200"></i>
     </p>
   </div>
-  <form className="flex flex-col space-y-3 md:w-[50%] md:min-w-[500px]">
+  <form className="flex flex-col space-y-3 md:w-[50%] md:min-w-[500px]" ref={form} onSubmit={sendEmail}>
     <p className="text-base font-semibold tracking-wider">Feel free to send us your message</p>
     <div className="grid sm:grid-cols-2 space-y-3 sm:space-y-0 sm:space-x-3">
       <div className="">
-        <input type="text" id="name" name="name" placeholder="Your name" className="bg-white bg-opacity-20 border-none rounded-md active:border-none focus:ring-1 focus:ring-syellow w-full" autoComplete="off" required />
+        <input type="text" id="name" name="user_name" placeholder="Your name" className="bg-white bg-opacity-20 border-none rounded-md active:border-none focus:ring-1 focus:ring-syellow w-full" autoComplete="off" required />
         <small></small>
       </div>
       <div className="">
-        <input type="email" id="email" name="email" placeholder="Your email" className="bg-white bg-opacity-20 border-none rounded-md focus:ring-1 focus:ring-syellow w-full" autoComplete="off" required />
+        <input type="email" id="email" name="user_email" placeholder="Your email" className="bg-white bg-opacity-20 border-none rounded-md focus:ring-1 focus:ring-syellow w-full" autoComplete="off" required />
         <small></small>
       </div>
     </div>
@@ -40,7 +62,7 @@ const ContactUs = () => {
       <textarea name="message" id="message" cols="30" rows="5" placeholder="Message" className="w-full bg-white bg-opacity-20 border-none rounded-md p-2 focus:ring-1 focus:ring-syellow"></textarea>
       <small></small>
     </div>
-    <button type="submit" className="text-black bg-syellow px-20 py-1 rounded-md text-base font-bold tracking-wider w-fit mx-auto focus:ring-1 focus:ring-syellow hover:bg-yellow-400 cursor-pointer">Submit</button>
+    <button type="submit" value="Send" className="text-black bg-syellow px-20 py-1 rounded-md text-base font-bold tracking-wider w-fit mx-auto focus:ring-1 focus:ring-syellow hover:bg-yellow-400 cursor-pointer">Submit</button>
   </form>
 </div>
     </div>

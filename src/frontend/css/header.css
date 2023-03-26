@@ -1,0 +1,8 @@
+#top-nav-link a.active {
+    @apply text-syellow border-b-4 border-syellow
+  }
+#side-nav-link a.active {
+    @apply text-syellow
+  }
+
+

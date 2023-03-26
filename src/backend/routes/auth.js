@@ -4,8 +4,9 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
+require('dotenv').config()
 
-const JWT_SECRET = 'Aliisagoodb$oy';
+const JWT_SECRET = process.env.REACT_APP_JWT_SECRET;
 
 
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
@@ -42,18 +43,19 @@ router.post('/createuser', [
 
     });
 
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-          user: 'afanshehzad.game.23@gmail.com',
-          pass: 'iwwdjommyxmzkwgo'
+          user: process.env.REACT_APP_EMAIL_ADDRESS,
+          pass: process.env.REACT_APP_EMAIL_PASSWORD
       }
   });
 
     // ... Your code to generate the verification code and save it in the user document
 
     let info = await transporter.sendMail({
-      from: 'afanshehzad.game.23@gmail.com', // sender address
+      from: process.env.REACT_APP_EMAIL_ADDRESS, // sender address
       to: user.email, // list of receivers
       subject: 'Verification code', // Subject line
       text: `Your verification code is ${code}`, // plain text body

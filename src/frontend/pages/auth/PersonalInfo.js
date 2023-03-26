@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../images/mainLogo.svg";
-import CardBase from "../images/CardBase.png";
+import Logo from "../../images/mainLogo.svg";
+import CardBase from "../../images/CardBase.png";
 
 
 const PersonalInfo = () => {
@@ -102,6 +102,7 @@ const PersonalInfo = () => {
                       onChange={onChange}
                       minLength={3}
                       maxLength={20}
+                      autoFocus
                     />
                   </div>
                   <div className="w-full">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Logo from "../images/mainLogo.svg";
-import CardBase from "../images/CardBase3.png";
+import Logo from "../../images/mainLogo.svg";
+import CardBase from "../../images/CardBase3.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Password = () => {
@@ -94,6 +94,7 @@ const Password = () => {
                           id="password"
                           onChange={(e) => setPassword(e.target.value)}
                           autoComplete="off"
+                          autoFocus
                         />
                       </div>
                       <div className="confirm-password">

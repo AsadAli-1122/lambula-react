@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import Logo from "../images/mainLogo.svg";
-import CardBase from "../images/CardBase2.png";
+import Logo from "../../images/mainLogo.svg";
+import CardBase from "../../images/CardBase2.png";
 import { Link, useNavigate ,useParams} from "react-router-dom";
 
 const Verification = () => {
@@ -8,10 +8,10 @@ const Verification = () => {
   const { email } = useParams();
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('token');
-  if (!token) {
-    navigate('/signup');
-  }
+  // const token = localStorage.getItem('token');
+  // if (!token) {
+  //   navigate('/signup');
+  // }
 
   const handleBack = () => {
     navigate(`/signup`);
@@ -108,6 +108,7 @@ const Verification = () => {
                         autoFocus
                         value={values[0]}
                         onChange={(e) => handleInputChange(0, e)}
+                        minLength={1}
                         maxLength={1}
                         ref={refs[0]}
                       />
@@ -116,6 +117,7 @@ const Verification = () => {
                         type="number"
                         value={values[1]}
                         onChange={(e) => handleInputChange(1, e)}
+                        minLength={1}
                         maxLength={1}
                         ref={refs[1]}
                       />
@@ -124,6 +126,7 @@ const Verification = () => {
                         type="number"
                         value={values[2]}
                         onChange={(e) => handleInputChange(2, e)}
+                        minLength={1}
                         maxLength={1}
                         ref={refs[2]}
                       />
@@ -132,6 +135,7 @@ const Verification = () => {
                         type="number"
                         value={values[3]}
                         onChange={(e) => handleInputChange(3, e)}
+                        minLength={1}
                         maxLength={1}
                         ref={refs[3]}
                       />

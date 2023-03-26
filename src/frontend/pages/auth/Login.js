@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import MainLogo from '../images/mainLogo.svg'
-import queenImg from '../images/queen@2x.png';
-import CardBase from '../images/CardBase.png';
+import MainLogo from '../../images/mainLogo.svg'
+import queenImg from '../../images/queen@2x.png';
+import CardBase from '../../images/CardBase.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
 

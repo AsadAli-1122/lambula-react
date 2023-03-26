@@ -1,7 +1,7 @@
 import React from 'react'
-import luggage from '../images/luggage.svg'
-import addGroup from '../images/add-group.svg'
-import creditCard from '../images/credit-card.svg'
+import luggage from '../../images/luggage.svg'
+import addGroup from '../../images/add-group.svg'
+import creditCard from '../../images/credit-card.svg'
 
 const DiscoverCards = () => {
 

@@ -1,7 +1,7 @@
 const connectToMongo = require('./db');
 const express = require('express');
 const cors = require('cors');
-
+require('dotenv').config()
 
 
 connectToMongo();
@@ -24,3 +24,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Lambula backend listening at http://localhost:${port}`);
 });
+
+

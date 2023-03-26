@@ -1,7 +1,7 @@
 import React from 'react'
-import ContactUs from '../components/ContactUs'
-import Destination from '../components/Destination'
-import DiscoverCards from '../components/DiscoverCards'
+import ContactUs from './ContactUs'
+import Destination from './Destination'
+import DiscoverCards from './DiscoverCards'
 // import Map from '../components/Map'
 // import Carasoul from '../components/Carasoul'
 
