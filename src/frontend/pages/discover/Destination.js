@@ -15,7 +15,7 @@ const Destination = () => {
   <p className="text-base xl:text-xl text-center tracking-wider w-2/3 mx-auto">Discovering Africa, choose the best Tour destination, Tour Operator and budget friendly trips</p>
   </div>
   
-  <div className="max-w-5xl min-h-[500px] grid grid-cols-2 grid-rows-3 lg:grid-cols-3 lg:grid-rows-3 grid-flow-row mx-auto justify-center my-4 gap-y-3 gap-x-3">
+  <div className="max-w-5xl min-h-[500px] grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-3 grid-flow-row mx-auto justify-center my-4 gap-y-3 gap-x-3 px-4">
       <div className="inset-shadow bg-scale min-h-[250px] flex items-end overflow-hidden p-4 rounded-2xl text-xl font-semibold tracking-wider bg-cover bg-center cursor-pointer" style={{ backgroundImage: `url(${Safari})` }}> Safari</div>
       <div className="inset-shadow bg-scale min-h-[250px] flex items-end overflow-hidden p-4 rounded-2xl text-xl font-semibold tracking-wider bg-cover bg-center cursor-pointer row-span-2" style={{ backgroundImage: `url(${People})` }} >People & Cluture</div>
       <div className="inset-shadow bg-scale min-h-[250px] flex items-end overflow-hidden p-4 rounded-2xl text-xl font-semibold tracking-wider bg-cover bg-center cursor-pointer row-span-2 lg:row-span-1"  style={{ backgroundImage: `url(${Mountains})` }}>Mountains</div>
