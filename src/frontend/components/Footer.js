@@ -26,9 +26,9 @@ const Footer = () => {
       </ul>
       <ul className="space-y-3 text-sm tracking-wider font-light">
           <li className="my-4 text-base sm:text-lg md:text-xl font-semibold uppercase">Home</li>
-          <li className="text-xs hover:text-syellow hover:cursor-pointer ease-in duration-300 hover:scale-105 hover:translate-x-4"><NavLink to="aboutus.html">About Us</NavLink></li>
-          <li className="text-xs hover:text-syellow hover:cursor-pointer ease-in duration-300 hover:scale-105 hover:translate-x-4"><NavLink to="contact.html">Contact Us</NavLink></li>
-          <li className="text-xs hover:text-syellow hover:cursor-pointer ease-in duration-300 hover:scale-105 hover:translate-x-4"><NavLink to="Blog.html">Blog</NavLink></li>
+          <li className="text-xs hover:text-syellow hover:cursor-pointer ease-in duration-300 hover:scale-105 hover:translate-x-4"><NavLink to="aboutus">About Us</NavLink></li>
+          <li className="text-xs hover:text-syellow hover:cursor-pointer ease-in duration-300 hover:scale-105 hover:translate-x-4"><NavLink to="contactus">Contact Us</NavLink></li>
+          <li className="text-xs hover:text-syellow hover:cursor-pointer ease-in duration-300 hover:scale-105 hover:translate-x-4"><NavLink to="blogs">Blog</NavLink></li>
       </ul>
       <ul className="space-y-3 text-sm tracking-wider font-light">
           <li className="my-4 text-base sm:text-lg md:text-xl font-semibold uppercase">Help Center</li>

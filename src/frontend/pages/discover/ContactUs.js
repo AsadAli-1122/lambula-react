@@ -59,7 +59,7 @@ const ContactUs = () => {
       <small></small>
     </div>
     <div>
-      <textarea name="message" id="message" cols="30" rows="5" placeholder="Message" className="w-full bg-white bg-opacity-20 border-none rounded-md p-2 focus:ring-1 focus:ring-syellow"></textarea>
+      <textarea name="message" id="message" cols="30" rows="5" placeholder="Message" className="w-full bg-white bg-opacity-20 border-none rounded-md p-2 focus:ring-1 focus:ring-syellow resize-none"></textarea>
       <small></small>
     </div>
     <button type="submit" value="Send" className="text-black bg-syellow px-20 py-1 rounded-md text-base font-bold tracking-wider w-fit mx-auto focus:ring-1 focus:ring-syellow hover:bg-yellow-400 cursor-pointer">Submit</button>
