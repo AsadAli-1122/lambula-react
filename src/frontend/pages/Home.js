@@ -8,6 +8,7 @@ import TourPackages from './tour/TourPackages'
 import AboutUs from './footer pages/AboutUs'
 import ContactUs from './footer pages/ContactUs'
 import Blogs from './footer pages/Blogs'
+import BlogDetails from './footer pages/BlogDetails'
 
 const Home = () => {
   
@@ -23,6 +24,7 @@ return (
       <Route path='aboutus' element={<AboutUs />} />
       <Route path='contactus' element={<ContactUs />} />
       <Route path='blogs' element={<Blogs />} />
+      <Route path='blog-details' element={<BlogDetails />} />
 
     </Routes>
     <Footer />

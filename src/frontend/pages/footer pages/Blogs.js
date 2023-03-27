@@ -42,7 +42,7 @@ const Blogs = () => {
                         </ul>
 
                         <ReactPaginate
-                            previousLabel={<i class="fa-solid fa-chevron-left"></i>}
+                            previousLabel={<i className="fa-solid fa-chevron-left"></i>}
                             nextLabel={<i className="fa-solid fa-chevron-right"></i>}
                             pageCount={Math.ceil(blogCardData.length / itemsPerPage)}
                             onPageChange={handlePageClick}
