@@ -18,10 +18,10 @@ const UserSchema = new mongoose.Schema({
         type: Number,
     },
     isCodeConfirmed: {
-      type: Boolean,
-      default: false,
+        type: Boolean,
+        default: false,
     },
-    vaccinated:{
+    vaccinated: {
         type: Boolean,
         required: true,
     },
@@ -31,9 +31,17 @@ const UserSchema = new mongoose.Schema({
         default: 'temporary',
     },
     password: {
-      type: String,
-      required: true,
-      default: "PasSWord"
+        type: String,
+        // required: true,
+        default: null,
+    },
+    resetToken: {
+        type: String,
+        default: null,
+    },
+    resetTokenExpiration: {
+        type: Date,
+        default: null,
     },
     createAt: {
         type: Date,
@@ -41,9 +49,10 @@ const UserSchema = new mongoose.Schema({
     },
     removeAt: {
         type: Date,
-        default: () => new Date(Date.now() + 10000),
+        default: () => new Date(Date.now() + 30000),
     },
 });
+
 
 const User = mongoose.model('user', UserSchema);
 module.exports = User;

@@ -24,7 +24,7 @@ return (
       <Route path='aboutus' element={<AboutUs />} />
       <Route path='contactus' element={<ContactUs />} />
       <Route path='blogs' element={<Blogs />} />
-      <Route path='blog-details' element={<BlogDetails />} />
+      <Route path='blogs/blog-details/:id' element={<BlogDetails />} />
 
     </Routes>
     <Footer />

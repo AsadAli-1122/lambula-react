@@ -4,6 +4,8 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
+const crypto = require('crypto');
+
 require('dotenv').config()
 
 const JWT_SECRET = process.env.REACT_APP_JWT_SECRET;
@@ -43,7 +45,6 @@ router.post('/createuser', [
 
     });
 
-
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -81,10 +82,10 @@ router.post('/createuser', [
 });
 
 
-// ROUTE 2: Confirm user code using: POST "/api/auth/confirmcode".
+// ROUTE 2: Verify user using: POST "/api/auth/confirmcode". No login required
 router.post('/confirmcode', [
   body('email', 'Enter a valid email').isEmail(),
-  body('code', 'Enter a valid 4-digit code').isLength({ min: 4, max: 4 })
+  body('code', 'Enter a valid code').isNumeric().isLength({ min: 4, max: 4 })
 ], async (req, res) => {
   let success = false;
   // If there are errors, return Bad request and the errors
@@ -92,47 +93,33 @@ router.post('/confirmcode', [
   if (!errors.isEmpty()) {
     return res.status(400).json({ success, errors: errors.array() });
   }
-
   try {
     // Check whether the user with this email exists
     let user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(400).json({ success, error: "User not found with this email" })
+      return res.status(400).json({ success, error: "Sorry, no user found with this email" })
     }
 
-    // Check whether the code matches
-    if (user.code !== req.body.code) {
-      return res.status(400).json({ success, error: "Invalid verification code" })
+    // Check whether the code matches the one in the user's document
+    if (user.code !== parseInt(req.body.code)) {
+      return res.status(400).json({ success, error: "Sorry, the verification code is incorrect" })
     }
 
-    // Check whether the code has expired
-    const expirationTime = new Date(user.createdAt).getTime() + 30000; // 30 seconds
-    if (new Date().getTime() > expirationTime) {
-      return res.status(400).json({ success, error: "Verification code expired, please generate a new code" })
-    }
-
-    // Check whether the user has already confirmed the code before
-    if (user.isCodeConfirmed) {
-      return res.status(400).json({ success, error: "This code has already been confirmed" })
-    }
-
-    // Set the flag indicating that the user has confirmed the code and update the user type to permanent
+    // Update the user's document to set the code to null
+    user.code = null;
     user.isCodeConfirmed = true;
     user.userType = 'permanent';
-    user.code = null;
     user.removeAt = null;
-    user.password = 'PasSWorD'
     await user.save();
 
     success = true;
     res.json({ success });
+
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");
   }
 });
-
-
 
 
 // ROUTE 3: Add password in users data using: POST "/api/auth/setpassword".
@@ -205,6 +192,90 @@ router.post('/login', [
     res.status(500).send("Internal Server Error");
   }
 });
+
+// ROUTE 4: Forgot password by email: POST "/api/auth/forgotpassword" no login required
+router.post('/forgotpassword', async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(20).toString('hex');
+
+    // Set reset token and expiration in user document
+    user.resetToken = resetToken;
+    user.resetTokenExpiration = Date.now() + 3600000; // Expires in 1 hour
+    await user.save();
+
+    // Send email to user with password reset link
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.REACT_APP_EMAIL_ADDRESS,
+        pass: process.env.REACT_APP_EMAIL_PASSWORD
+      }
+    });
+
+    const mailOptions = {
+      from: process.env.REACT_APP_EMAIL_ADDRESS,
+      to: email,
+      subject: 'Password reset',
+      text: `Please click on the following link to reset your password: ${process.env.CLIENT_RESET}/resetpassword/${resetToken}`
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+        res.json({ message: `Password reset link has been sent to ${email}` });
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+// ROUTE 5: Confirm password reset URL and set new password
+router.put('/resetpassword/:resetToken', async (req, res) => {
+  try {
+    const resetToken = req.params.resetToken;
+    const user = await User.findOne({ resetToken: resetToken });
+
+    if (!user) {
+      return res.status(404).json({ error: 'Invalid or expired reset password link' });
+    }
+
+    const resetTokenExpiration = user.resetTokenExpiration;
+    const now = Date.now();
+
+    if (now > resetTokenExpiration) {
+      return res.status(404).json({ error: 'Reset password link has expired' });
+    }
+
+    const { password } = req.body;
+    if (!password) {
+      return res.status(400).json({ error: 'Please provide a new password' });
+    }
+
+    user.password = password;
+    user.resetToken = null;
+    user.resetTokenExpiration = null;
+    await user.save();
+
+    res.json({ message: 'Password has been reset successfully' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 
 // ROUTE 5: Get user details using authtoken in header: GET "/api/auth/getuserdetails"

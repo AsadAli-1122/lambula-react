@@ -58,7 +58,7 @@ const Login = () => {
                 <h1 className="text-syellow font-bold text-2xl tracking-wider">Log In</h1>
                 <div>
                     <label className="text-sm font-light" htmlFor="email" >Email </label>
-                    <input className="w-full bg-transparent focus:outline-none focus:ring-0 border-t-0 border-l-0 border-r-0 border-b-2 focus:border-syellow px-2" type="text" name="email" id="email" autoComplete="nope" value={credentials.email} onChange={handleChange} />
+                    <input className="w-full bg-transparent focus:outline-none focus:ring-0 border-t-0 border-l-0 border-r-0 border-b-2 focus:border-syellow px-2" type="email" name="email" id="email" autoComplete="nope" value={credentials.email} onChange={handleChange} />
                 </div>
                 <div>
                     <label className="text-sm font-light" htmlFor="password">Password</label>
@@ -66,7 +66,7 @@ const Login = () => {
                 </div>
                 <div className="text-center space-y-2">
                     {error && <div className="text-red-500 text-center my-2">{error}</div>}
-                    <p className="text-center"><a href="/" className="text-xs">Forgot Password?</a></p>
+                    <p className="text-center"><Link to="/forgot-password" className="text-xs hover:text-syellow">Forgot Password?</Link></p>
                     <button  disabled={ !credentials.email || !credentials.password }  type="submit" className="w-fit px-12 py-2 font-bold bg-syellow text-black rounded-md hover:bg-yellow-500 disabled:bg-xl-yellow">Login</button>
                     <p className="text-center text-xs">Don,t Have An Account? <Link to="/signup" className="border-b border-gray-500 text-syellow hover:border-syellow">Create Account</Link></p>
                 </div>
@@ -75,24 +75,6 @@ const Login = () => {
     </div>
 
 </div>
-      {/* <div className='w-full min-h-screen bg-cover bg-fixed bg-center' style={{backgroundImage: `url(${queenImg})`,}}> */}
-        {/* <div className='w-full min-h-screen flex justify-center items-center space-x-8' style={{backgroundColor: 'rgba(0, 0, 0, 0.6)',}}>
-          <form onSubmit={handleSubmit} className="bg-dark-gray w-full sm:max-w-sm py-6 px-4 sm:px-8 sm:rounded-2xl flex flex-col justify-center text-white">
-            <h1 className='text-3xl text-syellow text-center'>Log in</h1>
-            <div className='signup-input-div flex flex-col py-2 w-full'>
-              <label>Email :</label>
-              <input type="email" className='w-full px-2 py-1 bg-transparent border rounded-md focus:ring-0 focus:outline-none focus:border-syellow text-gray-300' name="email" value={credentials.email} onChange={handleChange}/>
-            </div>
-            <div>
-              <label>Password :</label>
-              <input type="password" className='w-full px-2 py-1 bg-transparent border rounded-md focus:ring-0 focus:outline-none focus:border-syellow text-gray-300' name="password" value={credentials.password} onChange={handleChange} />
-            </div>
-            {error && <div className="text-red-500 text-center my-2">{error}</div>}
-            <button disabled={ !credentials.email || !credentials.password } type="submit" className='py-2 px-6 bg-syellow disabled:bg-yellow-200 hover:bg-yellow-400 text-b font-bold tracking-wider rounded w-fit mx-auto mt-4'>Login</button>
-            <p className='text-center text-sm py-4'>If you don't have a Account <Link className='text-base font-semibold tracking-wider text-syellow hover:text-yellow-400 hover:underline underline-offset-2' to="/Signup">Sign up</Link></p>
-          </form>
-        </div> */}
-      {/* </div> */}
     </>
   )
 }
